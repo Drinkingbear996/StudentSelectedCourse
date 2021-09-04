@@ -12,6 +12,7 @@ public class RegisterListener implements  ActionListener   {
     public void actionPerformed(ActionEvent e) {
 
         //创建对象，调用注册器方法
-        new RegisterUser();
+     new RegisterUser();
+
     }
 }

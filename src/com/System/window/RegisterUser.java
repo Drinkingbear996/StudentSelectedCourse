@@ -1,11 +1,16 @@
 package com.System.window;
 
+import com.System.Backstage.DataBaseStorageInformation;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.JarURLConnection;
 
-public class RegisterUser extends JFrame {
+public class RegisterUser extends JFrame  {
+
+
 
 
     public RegisterUser()
@@ -28,11 +33,11 @@ public class RegisterUser extends JFrame {
         jframe.add(jPanel);
 
         //登录面板
-        RegisterPanelContent(jPanel);
+      PanelContent(jPanel);
+
     }
 
-
-    public static  void RegisterPanelContent(JPanel jPanel)
+    public static  void PanelContent(JPanel jPanel)
     {
         //用户
         JLabel jLabelUser=new JLabel("用户名:");
@@ -40,9 +45,9 @@ public class RegisterUser extends JFrame {
         jPanel.add(jLabelUser);
 
 
-        JTextField JTextFieldUser=new JTextField(20);
-        JTextFieldUser.setBounds(140,20,165,25);
-        jPanel.add(JTextFieldUser);
+        JTextField juser=new JTextField(20);
+        juser.setBounds(140,20,165,25);
+        jPanel.add(juser);
 
 
         //密码 JPasswordField可用*号
@@ -70,19 +75,62 @@ public class RegisterUser extends JFrame {
         jButton.setBounds(150,140,80,25);
         jPanel.add(jButton);
 
+
+      //获取账号和密码信息
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SuccessDialog("注册成功");
-                TextareaListener textareaListener=new TextareaListener();
 
-                JTextFieldUser.addActionListener(textareaListener);
-                jPasswordField.addActionListener(textareaListener);
+
+                //获取账号
+                String User=juser.getText();
+
+                //获取密码
+                String Password=String.valueOf(jPasswordField.getPassword());
+                String RepeatPassword=String.valueOf(jPasswordField.getPassword());
+
+
+                System.out.println(juser.getText());
+                System.out.println(Password);
+                System.out.println( RepeatPassword);
+                System.out.println(Password.equals(RepeatPassword));
+                //判断非空逻辑
+                 if (User!=null&&Password.equals(RepeatPassword))
+                 {
+                     JOptionPane.showMessageDialog(null,"注册成功!");
+
+                     //传入数据到数据库后台
+                     try {
+                         new  DataBaseStorageInformation(User,Password);
+                     } catch (Exception exception) {
+                         exception.printStackTrace();
+                     }
+                     //设置为空
+                     juser.setText("");
+                     jPasswordField.setText("");
+                     RepeatJPasswordField.setText("");
+
+                 }
+                 else  if (User==null)
+                 {
+                     JOptionPane.showMessageDialog(null,"用户名为空!");
+                 }
+
+                 else if (Password==null||RepeatPassword==null)
+                 {
+                     JOptionPane.showMessageDialog(null,"请输入密码!");
+                 }
+
+                 else if (!Password.equals(RepeatPassword))
+                 {
+                     JOptionPane.showMessageDialog(null,"两次密码不一致!");
+                 }
+                 else
+                 {
+                     JOptionPane.showMessageDialog(null,"请填写信息");
+                 }
 
             }
         });
-
-
     }
-
 }

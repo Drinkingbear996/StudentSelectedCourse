@@ -14,6 +14,7 @@ public class login extends JFrame  {
 
     public static void main(String[] args) {
 
+    //登录
     new login().init();
     }
 
@@ -70,6 +71,8 @@ public class login extends JFrame  {
         JButton jButton=new JButton("登录");
         jButton.setBounds(100,100,80,25);
         jPanel.add(jButton);
+
+        jButton.addActionListener(new LoginListener());
 
         //注册
         JButton JRegisterButton=new JButton("没有账户？点击注册");
