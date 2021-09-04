@@ -7,19 +7,18 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /*
- 规范：上下间隔30
+ 规范：上下间隔30maven
 * */
 public class login extends JFrame  {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
     //登录
     new login().init();
     }
 
-    public void init()
-    {
+    public void init() throws Exception {
         JFrame jframe =new JFrame("登录界面");
 
         jframe.setVisible(true);
@@ -44,8 +43,7 @@ public class login extends JFrame  {
 
     }
 
-    private  static  void PanelContent(JPanel jPanel)
-    {
+    private  static  void PanelContent(JPanel jPanel) throws Exception {
         //用户
         JLabel jLabelUser=new JLabel("用户名:");
         jLabelUser.setBounds(50,20,80,25);
@@ -72,7 +70,16 @@ public class login extends JFrame  {
         jButton.setBounds(100,100,80,25);
         jPanel.add(jButton);
 
-        jButton.addActionListener(new LoginListener());
+
+
+        //获取输入的用户名和密码
+        String InputUser=JTextFieldUser.getText();
+        String InputPassword=String.valueOf(jPasswordField.getPassword());
+
+        //因为JPassword返回的是char[]数组，我们用String.valueOf转换回String
+        //调用登录监听
+        jButton.addActionListener(new LoginListener(InputUser,InputPassword));
+
 
         //注册
         JButton JRegisterButton=new JButton("没有账户？点击注册");
