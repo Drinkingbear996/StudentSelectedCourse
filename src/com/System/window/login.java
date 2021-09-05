@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-/*
- 规范：上下间隔30maven
-* */
+/**
+ 规范：上下间隔30
+**/
 public class login extends JFrame  {
 
     JFrame jframe =new JFrame("学生选课系统");
@@ -25,7 +25,7 @@ public class login extends JFrame  {
         jframe.setVisible(true);
 
 
-        jframe.setSize(300,200);
+        jframe.setSize(320,320);
         jframe.setBackground(Color.white);
 
         //窗口可以关闭
@@ -77,9 +77,12 @@ public class login extends JFrame  {
         String InputUser=JTextFieldUser.getText();
         String InputPassword=String.valueOf(jPasswordField.getPassword());
 
+        System.out.println(InputUser);
+        System.out.println(InputPassword);
+
         //因为JPassword返回的是char[]数组，我们用String.valueOf转换回String
         //调用登录监听
-        jButton.addActionListener(new LoginListener(InputUser,InputPassword,jframe));
+        jButton.addActionListener(new LoginListener(InputUser,InputPassword));
 
 
         //注册

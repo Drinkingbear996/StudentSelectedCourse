@@ -1,50 +1,82 @@
 package com.System.Backstage;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-public class DataBaseVerification  {
+import com.System.window.QueryInterface_Student;
+import com.System.window.QueryInterface_Teacher;
 
-    //接收SQL
-private String sql;
+import javax.swing.*;
+import java.sql.*;
 
-    public DataBaseVerification(String sql)
+public class DataBaseVerification {
+
+    //传入部门和用户名 和密码
+    private String User_Verification;
+    private String password_Verification;
+
+    public DataBaseVerification(String User_Verification, String password_Verification) throws  Exception {
+
+
+        this.User_Verification=User_Verification;
+        this.password_Verification=password_Verification;
+
+
+
+    }
+    public DataBaseVerification()
     {
-        this.sql=sql;
+
     }
 
-    public boolean VerificationLogin() throws Exception {
 
+
+    public void VerificationLogin() throws Exception {
+
+        String sql="select  department from loginInformation where user=? and password=? ";
 
         Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","12345678");
 
         //通过数据库对象获取sql执行对象
-        Statement st= null;
+        PreparedStatement pst= null;
         try {
-            st = con.createStatement();
+            pst = con.prepareStatement(sql);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
 
-        //定义sql
-        String DataMatchSQL=sql;
+        //返回结果集
+        ResultSet rs=pst.executeQuery(sql);
+        pst.setString(1,User_Verification);
+        pst.setString(2,password_Verification);
 
-        //返回执行成功(受到影响)的命令数
 
-        int count1=st.executeUpdate(DataMatchSQL);
-
-        if (count1>0)
+        //如果能匹配
+        if (rs.next())
         {
             System.out.println("与数据库中匹配!");
-            System.out.println("受影响的行数： "+count1);
-            return true;
+
+            String department = rs.getString("department");
+
+            if ("学生".equals(department))
+            {
+                new QueryInterface_Student();
+            }
+            else  if ("老师".equals(department))
+            {
+                new QueryInterface_Teacher();
+            }
+
+
         }
         else
         {
             System.out.println("与数据库中不匹配!");
-            return false;
+
         }
+
+
+
+
+
+
 
 
         }

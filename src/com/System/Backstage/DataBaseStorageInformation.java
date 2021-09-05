@@ -36,16 +36,12 @@ public class DataBaseStorageInformation {
 
 
         String sql1;
-        //判断插入学生表还是老师表
-        if ("学生".equals(Register_Department))
-        {
-            sql1="insert into student (user,password,name,department) values ('"+Register_User+"','"+Register_Password+"','"+RealName+"','"+Register_Department+"')";
-        }
 
-        else
-        {
-            sql1="insert into Teacher (user,password,name,department) values ('"+Register_User+"','"+Register_Password+"','"+RealName+"','"+Register_Department+"')";
-        }
+
+
+
+            sql1="insert into loginInformation (user,password,name,department) values ('"+Register_User+"','"+Register_Password+"','"+RealName+"','"+Register_Department+"')";
+
 
 
         //返回执行成功(受到影响)的命令数

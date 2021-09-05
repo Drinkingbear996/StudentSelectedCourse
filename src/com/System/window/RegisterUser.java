@@ -96,8 +96,6 @@ public class RegisterUser extends JFrame  {
 
 
 
-
-
         jPanel.add(jCheckBox1);
         jPanel.add(jCheckBox2);
 
