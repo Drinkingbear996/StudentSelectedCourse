@@ -7,12 +7,16 @@ import java.sql.Statement;
 
 public class DataBaseStorageInformation {
 
-    private  String User;
-    private  String Password;
+    private  String Register_User;
+    private  String Register_Password;
+    private  String RealName;
+    private  String Register_Department;
 
-    public DataBaseStorageInformation(String User, String Password) throws Exception {
-        this.User = User;
-        this.Password = Password;
+    public DataBaseStorageInformation(String User, String Password,String Name, String Department) throws Exception {
+        this.Register_User = User;
+        this.Register_Password = Password;
+        this.RealName = Name;
+        this.Register_Department = Department;
         JDbcStorage();
     }
   //抛出CastCatchClass异常
@@ -30,11 +34,20 @@ public class DataBaseStorageInformation {
             throwables.printStackTrace();
         }
 
-        //
+
+        String sql1;
+        //判断插入学生表还是老师表
+        if ("学生".equals(Register_Department))
+        {
+            sql1="insert into student (user,password,name,department) values ('"+Register_User+"','"+Register_Password+"','"+RealName+"','"+Register_Department+"')";
+        }
+
+        else
+        {
+            sql1="insert into Teacher (user,password,name,department) values ('"+Register_User+"','"+Register_Password+"','"+RealName+"','"+Register_Department+"')";
+        }
 
 
-        //定义sql
-        String sql1="insert into Student(user,password) values "+"("+User+","+Password+")";
         //返回执行成功(受到影响)的命令数
 
         int count1=st.executeUpdate(sql1);

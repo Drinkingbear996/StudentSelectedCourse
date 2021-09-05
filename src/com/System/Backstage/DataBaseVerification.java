@@ -37,6 +37,7 @@ private String sql;
         if (count1>0)
         {
             System.out.println("与数据库中匹配!");
+            System.out.println("受影响的行数： "+count1);
             return true;
         }
         else

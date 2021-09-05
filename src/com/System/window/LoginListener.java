@@ -20,18 +20,18 @@ import java.util.regex.Pattern;
 
 public class LoginListener  implements ActionListener {
 
+    //传入部门和用户名 和窗口
     private String User_Verification;
 
-    private  String Password_Verification;
+    private  String Department_Verification;
 
-    public LoginListener(String User_Verification,String Password_Verification) throws Exception {
+    JFrame jFrame;
+    public LoginListener(String User_Verification,String Department_Verification,JFrame jFrame) throws Exception {
 
 
         this.User_Verification=User_Verification;
-        this.Password_Verification=Password_Verification;
-
-        //调用验证方法
-        verification();
+        this.Department_Verification=Department_Verification;
+        this.jFrame=jFrame;
 
     }
 
@@ -41,72 +41,70 @@ public class LoginListener  implements ActionListener {
 
     }
 
-    public  void verification() throws Exception {
 
-        String regexStudent="20\\d{10}";
 
-        String regexTeacher="^[A-Za-z]$";
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
 
         /**
          * 跳转到学生界面
          * */
-        if (User_Verification.matches(regexStudent))
+        if ("学生".equals(Department_Verification))
         {
             //则判定为学生
 
 
             //再调用DataBase中的构造方法实现SQL语句的查询
-         boolean result=  new DataBaseVerification("select password from Student where user="+User_Verification).VerificationLogin();
+            boolean result= false;
+
+            try {
+                //调用VerificationLogin()方法判断数据库密码是否正确
+                result = new DataBaseVerification("select password from Student where user="+User_Verification).VerificationLogin();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+
             //数据库判定密码是否正确
             if (result==true)
             {
                 //跳转学生界面
-
+                new QueryInterface_Student();
+                jFrame.removeNotify();
             }
-           else
+            else
             {
 
                 JOptionPane.showMessageDialog(null,"密码不正确");
             }
         }
-        else  if (User_Verification.matches(regexTeacher))
+        else  if ("老师".equals(Department_Verification))
         {
             //则判定为老师
 
-            boolean result=  new DataBaseVerification("select password from Teacher where user="+User_Verification).VerificationLogin();
+            boolean result = false;
+
+            try {
+                result = new DataBaseVerification("select password from teacher where user="+"'"+User_Verification+"'").VerificationLogin();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
             //数据库判定密码是否正确
             if (result==true)
             {
                 //跳转老师界面
 
+                 new QueryInterface_Teacher();
+                 //关闭原窗口,跳转
+                jFrame.removeNotify();
             }
+
             else
             {
                 JOptionPane.showMessageDialog(null,"密码不正确");
             }
 
-
-
         }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-       String user="202010139066";
-
-       String regex="20\\d{10}";
-
-
-
-
-
-
-
-
-
-
-
 
         /**
          * 跳转到老师界面

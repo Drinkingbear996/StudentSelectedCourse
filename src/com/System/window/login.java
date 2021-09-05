@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 * */
 public class login extends JFrame  {
 
+    JFrame jframe =new JFrame("学生选课系统");
 
     public static void main(String[] args) throws Exception {
 
@@ -19,7 +20,7 @@ public class login extends JFrame  {
     }
 
     public void init() throws Exception {
-        JFrame jframe =new JFrame("登录界面");
+
 
         jframe.setVisible(true);
 
@@ -43,7 +44,7 @@ public class login extends JFrame  {
 
     }
 
-    private  static  void PanelContent(JPanel jPanel) throws Exception {
+    private    void PanelContent(JPanel jPanel) throws Exception {
         //用户
         JLabel jLabelUser=new JLabel("用户名:");
         jLabelUser.setBounds(50,20,80,25);
@@ -78,7 +79,7 @@ public class login extends JFrame  {
 
         //因为JPassword返回的是char[]数组，我们用String.valueOf转换回String
         //调用登录监听
-        jButton.addActionListener(new LoginListener(InputUser,InputPassword));
+        jButton.addActionListener(new LoginListener(InputUser,InputPassword,jframe));
 
 
         //注册
