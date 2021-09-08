@@ -1,4 +1,4 @@
-package com.System.Student_Window;
+package com.System.Teacher_Window;
 
 import com.System.window.QueryInterface_Student;
 
@@ -7,23 +7,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
-public class AlterCourse extends JFrame {
+public class AddORDeleteCourse extends  JFrame {
 
     private   JPanel jPanelTop;
     private   JPanel jPanelBottom;
     private JPanel output;
 
-    public  AlterCourse()
+    public AddORDeleteCourse()
     {
-        init();
+        initAddORDeleteCourse();
     }
 
 
-    public void init()
+    public void initAddORDeleteCourse()
     {
-
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(320,350);
         setLayout( new BorderLayout());
@@ -59,7 +56,7 @@ public class AlterCourse extends JFrame {
         });
 
 
-        JLabel LabelSearch=new JLabel("请输入要查询的课程");
+        JLabel LabelSearch=new JLabel("请输入查询的课程");
         LabelSearch.setSize(80,25);
         jPanelTop.add(LabelSearch);
 
@@ -73,11 +70,11 @@ public class AlterCourse extends JFrame {
 
 
 
-        JButton addCourse=new JButton("增加");
+        JButton addCourse=new JButton("增加课程");
         addCourse.setSize(5,25);
         jPanelTop.add(addCourse);
 
-        JButton DeleteCourse=new JButton("删除");
+        JButton DeleteCourse=new JButton("删除课程");
         DeleteCourse.setSize(5,25);
         jPanelTop.add(DeleteCourse);
 /** ---------------------------------------------------------*/
@@ -106,7 +103,8 @@ public class AlterCourse extends JFrame {
 
         pack();
 
+    }
+    public static void main(String[] args) {
 
     }
-
 }

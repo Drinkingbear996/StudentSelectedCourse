@@ -90,6 +90,7 @@ public class login extends JFrame  {
 
                 System.out.println("获取账号:" + InputUser);
                 System.out.println("获取密码:" + InputPassword);
+
                 if (InputPassword.isEmpty() || InputUser.isEmpty()) {
                     JOptionPane.showMessageDialog(jframe, "用户名或密码未完全填写");
                     new login();
@@ -97,8 +98,8 @@ public class login extends JFrame  {
                 } else {
 
                 try {
-                    //成功之后
-                    new DataBaseVerification(InputUser, InputPassword).VerificationLogin();
+                    //验证账号密码
+                    new DataBaseVerification(InputUser, InputPassword,jFrame).VerificationLogin();
 
                 } catch (Exception exception) {
                     exception.printStackTrace();

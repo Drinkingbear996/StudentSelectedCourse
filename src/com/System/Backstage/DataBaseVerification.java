@@ -6,18 +6,21 @@ import com.System.window.QueryInterface_Teacher;
 import javax.swing.*;
 import java.sql.*;
 
-public class DataBaseVerification {
+public class DataBaseVerification extends JFrame {
 
     //传入部门和用户名 和密码
     private String UserVer;
     private String passwordVer=null;
+  private JFrame jFrame;
 
-
-    public DataBaseVerification(String User_Verification, String password_Verification) throws  Exception {
+    public DataBaseVerification(String User_Verification, String password_Verification,JFrame jFrame) throws  Exception {
 
 
         UserVer =User_Verification;
+        System.out.println(User_Verification+"验证");
         passwordVer=password_Verification;
+        this.jFrame=jFrame;
+        System.out.println(password_Verification+"验证");
         System.out.println("密码："+passwordVer);
         System.out.println("账号:"+UserVer);
 
@@ -28,8 +31,9 @@ public class DataBaseVerification {
 
     public void VerificationLogin() throws SQLException{
 
-        String sql="select  department from loginInformation where user=? and password=? ";
+        String sql="select * from loginInformation where user=? and password=? ";
 
+        System.out.println(sql);
         Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","12345678");
 
         //通过数据库对象获取sql执行对象
@@ -40,13 +44,17 @@ public class DataBaseVerification {
             ResultSet rs;
 
             pst = con.prepareStatement(sql);
-            pst.setString(1,"'"+UserVer+"'" );
-            pst.setString(2,"'"+passwordVer+"'");
+            pst.setString(1,UserVer);
+            pst.setString(2,passwordVer);
+
+
 
             rs=pst.executeQuery();
 
             //如果能匹配
-            if (rs.next())
+                boolean b=rs.next();
+            System.out.println("是否有下一个"+b);
+            if (b)
             {
                 System.out.println("与数据库中匹配!");
 
@@ -54,13 +62,16 @@ public class DataBaseVerification {
 
                 if ("学生".equals(department))
                 {
+
                     new QueryInterface_Student();
+                    jFrame.removeNotify();
 
 
                 }
                 else  if ("老师".equals(department))
                 {
                     new QueryInterface_Teacher();
+                    jFrame.removeNotify();
                 }
 
 

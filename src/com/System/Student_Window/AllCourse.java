@@ -1,36 +1,37 @@
 package com.System.Student_Window;
 
+import com.System.Tool.ConnectionJDBC;
+import com.System.Tool.ConnectionJDBCCourse;
 import com.System.window.QueryInterface_Student;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /** 默认是320 350*/
 
 
 public class AllCourse extends JFrame {
 
-    JPanel jPanelTop;
-    JPanel jPanelBottom;
-    JPanel output;
+  private   JPanel jPanelTop;
+  private   JPanel jPanelBottom;
+  private JPanel output;
 
-    //获取当前用户的信息 未完成
-    String UserName;
+    ArrayList<String> list;
 
-    public AllCourse(String UserName)
-    {
-        this.UserName=UserName;
-    }
+public AllCourse() throws SQLException {
+    init();
+}
 
-    public AllCourse()
-    {
-        init();
-    }
 
-    public void init()
-    {
+
+    public void init() throws SQLException {
        setVisible(true);
        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
        setSize(320,350);
@@ -60,24 +61,21 @@ public class AllCourse extends JFrame {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 new QueryInterface_Student();
                 removeNotify();
             }
         });
 
 
-        JLabel LabelSearch=new JLabel("请输入");
-        LabelSearch.setSize(80,25);
-        jPanelTop.add(LabelSearch);
 
-
-        JTextField Search=new JTextField(10);
-        Search.setSize(165,25);
-        jPanelTop.add(Search);
-
-        JButton SearchBtn=new JButton("查询");
+        JButton SearchBtn=new JButton("点击查询所有课程");
         SearchBtn.setSize(10,25);
         jPanelTop.add(SearchBtn);
+
+
+
+
 
 /** ---------------------------------------------------------*/
 
@@ -86,14 +84,21 @@ public class AllCourse extends JFrame {
 
       output.add(OutPutLabel,BorderLayout.NORTH);
 
+      //显示文本
         JTextArea jTextArea=new JTextArea(10,10);
         jTextArea.setBounds(100,20,165,25);
         jTextArea.setEditable(false);
+        jTextArea.setLineWrap(true);//如果内容过长，自动换行，在文本域加上滚动条，水平和垂直滚动条始终出现。
+
+
+
+
         output.add(jTextArea,BorderLayout.CENTER);
 
 /** ---------------------------------------------------------*/
 
-       JLabel OutputUser=new JLabel("当前用户:");
+       JLabel OutputUser=new JLabel("欢迎进入!");
+
        jPanelBottom.add(OutputUser,BorderLayout.SOUTH);
 
 /** ---------------------------------------------------------*/
@@ -102,15 +107,43 @@ public class AllCourse extends JFrame {
         add(jPanelBottom,BorderLayout.SOUTH);
 
 
-        pack();
+        //监听查询按钮
+        SearchBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                jTextArea.setText("");
+                try {
+                    list=new ConnectionJDBCCourse().SQL();
+
+
+                    jTextArea.append("课程编号  课程名称  课程学分  课程人数\r\n");
+
+                    for (int i = 0; i < list.size(); i++) {
+
+                        if(i==3)
+                        {
+                            System.out.println();
+                        }
+                        else
+                        {
+                            jTextArea.append(list.get(i)+"          ");
+                        }
+
+
+                    }
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
+            }
+        });
 
 
     }
 
-
-    public static void main(String[] args) {
-        new AllCourse();
+    public static void main(String[] args) throws SQLException {
+        new  AllCourse();
     }
-
 }

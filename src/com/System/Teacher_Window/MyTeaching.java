@@ -1,4 +1,4 @@
-package com.System.Student_Window;
+package com.System.Teacher_Window;
 
 import com.System.window.QueryInterface_Student;
 
@@ -7,23 +7,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
-public class AlterCourse extends JFrame {
+public class MyTeaching extends JFrame {
 
     private   JPanel jPanelTop;
     private   JPanel jPanelBottom;
     private JPanel output;
 
-    public  AlterCourse()
+    public MyTeaching()
     {
-        init();
+        initMyTeacher();
     }
 
-
-    public void init()
+    public void initMyTeacher()
     {
-
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(320,350);
         setLayout( new BorderLayout());
@@ -59,27 +55,11 @@ public class AlterCourse extends JFrame {
         });
 
 
-        JLabel LabelSearch=new JLabel("请输入要查询的课程");
-        LabelSearch.setSize(80,25);
-        jPanelTop.add(LabelSearch);
-
-
-        JTextField Search=new JTextField(10);
-        Search.setSize(165,25);
-        jPanelTop.add(Search);
-
-        //获取内容
-        String input=Search.getText();
-
-
-
-        JButton addCourse=new JButton("增加");
-        addCourse.setSize(5,25);
+        JButton addCourse=new JButton("查询我的授课情况");
+        addCourse.setSize(20,25);
         jPanelTop.add(addCourse);
 
-        JButton DeleteCourse=new JButton("删除");
-        DeleteCourse.setSize(5,25);
-        jPanelTop.add(DeleteCourse);
+
 /** ---------------------------------------------------------*/
 
         JLabel OutPutLabel=new JLabel("显示框");
@@ -103,10 +83,5 @@ public class AlterCourse extends JFrame {
         add(output,BorderLayout.CENTER);
         add(jPanelBottom,BorderLayout.SOUTH);
 
-
-        pack();
-
-
     }
-
 }

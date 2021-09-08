@@ -8,16 +8,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /** 标准600x500*/
 public class QueryInterface_Student extends JFrame {
 
-    JFrame jFrame;
-    JPanel jPanel;
+    private JFrame jFrame;
+    private JPanel jPanel;
+    private String name;
 
     public QueryInterface_Student()
 
     {
+
         initQueryInterface_Student();
     }
 
@@ -36,7 +39,7 @@ public class QueryInterface_Student extends JFrame {
         JButton jb1=new JButton("我的课程");
         JButton jb2=new JButton("全部课程");
         JButton jb3=new JButton("修改课程信息");
-        JButton jb4=new JButton("退出");
+        JButton jb4=new JButton("退出系统");
 
 
         add(jb1);
@@ -48,14 +51,19 @@ public class QueryInterface_Student extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
               new MyCourse();
+                removeNotify();
             }
         });
 
         jb2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            new AllCourse();
-            removeNotify();
+                try {
+                    new AllCourse();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                removeNotify();
             }
         });
 
@@ -63,6 +71,7 @@ public class QueryInterface_Student extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             new AlterCourse();
+                removeNotify();
             }
         });
 

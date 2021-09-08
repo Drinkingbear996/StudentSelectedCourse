@@ -1,33 +1,31 @@
-package com.System.Student_Window;
+package com.System.Teacher_Window;
 
 import com.System.window.QueryInterface_Student;
+import com.System.window.QueryInterface_Teacher;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
-public class AlterCourse extends JFrame {
+public class AllCourseForTeacher extends  JFrame {
 
     private   JPanel jPanelTop;
     private   JPanel jPanelBottom;
     private JPanel output;
 
-    public  AlterCourse()
+    public AllCourseForTeacher()
     {
-        init();
+    initAllTeacherForTeacher();
     }
 
-
-    public void init()
+    public void initAllTeacherForTeacher()
     {
-
+        setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(320,350);
         setLayout( new BorderLayout());
-        setVisible(true);
+
 
         jPanelTop=new JPanel();
         jPanelBottom=new JPanel();
@@ -53,33 +51,16 @@ public class AlterCourse extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new QueryInterface_Student();
+                new QueryInterface_Teacher();
                 removeNotify();
             }
         });
 
 
-        JLabel LabelSearch=new JLabel("请输入要查询的课程");
-        LabelSearch.setSize(80,25);
-        jPanelTop.add(LabelSearch);
+        JButton SearchBtn=new JButton("查询所有老师的课程");
+        SearchBtn.setSize(10,25);
+        jPanelTop.add(SearchBtn);
 
-
-        JTextField Search=new JTextField(10);
-        Search.setSize(165,25);
-        jPanelTop.add(Search);
-
-        //获取内容
-        String input=Search.getText();
-
-
-
-        JButton addCourse=new JButton("增加");
-        addCourse.setSize(5,25);
-        jPanelTop.add(addCourse);
-
-        JButton DeleteCourse=new JButton("删除");
-        DeleteCourse.setSize(5,25);
-        jPanelTop.add(DeleteCourse);
 /** ---------------------------------------------------------*/
 
         JLabel OutPutLabel=new JLabel("显示框");
@@ -104,9 +85,8 @@ public class AlterCourse extends JFrame {
         add(jPanelBottom,BorderLayout.SOUTH);
 
 
-        pack();
-
-
     }
-
+    public static void main(String[] args) {
+        new AllCourseForTeacher();
+    }
 }
