@@ -1,7 +1,10 @@
 package com.System.window;
 
+import com.System.Backstage.DataBaseVerification;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -25,7 +28,7 @@ public class login extends JFrame  {
         jframe.setVisible(true);
 
 
-        jframe.setSize(320,320);
+        jframe.setSize(320,350);
         jframe.setBackground(Color.white);
 
         //窗口可以关闭
@@ -37,14 +40,14 @@ public class login extends JFrame  {
 
         jframe.add(jPanel);
 
-        PanelContent(jPanel);
+        PanelContent(jPanel,jframe);
 
    //打开注册，隐藏窗口
 
 
     }
 
-    private    void PanelContent(JPanel jPanel) throws Exception {
+    private    void PanelContent(JPanel jPanel,JFrame jFrame) throws Exception {
         //用户
         JLabel jLabelUser=new JLabel("用户名:");
         jLabelUser.setBounds(50,20,80,25);
@@ -73,16 +76,40 @@ public class login extends JFrame  {
 
 
 
-        //获取输入的用户名和密码
-        String InputUser=JTextFieldUser.getText();
-        String InputPassword=String.valueOf(jPasswordField.getPassword());
 
-        System.out.println(InputUser);
-        System.out.println(InputPassword);
 
-        //因为JPassword返回的是char[]数组，我们用String.valueOf转换回String
+
         //调用登录监听
-        jButton.addActionListener(new LoginListener(InputUser,InputPassword));
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                //获取输入的用户名和密码
+                String InputUser = JTextFieldUser.getText();
+                String InputPassword = String.valueOf(jPasswordField.getPassword());
+
+                System.out.println("获取账号:" + InputUser);
+                System.out.println("获取密码:" + InputPassword);
+                if (InputPassword.isEmpty() || InputUser.isEmpty()) {
+                    JOptionPane.showMessageDialog(jframe, "用户名或密码未完全填写");
+                    new login();
+                    jframe.removeNotify();
+                } else {
+
+                try {
+                    //成功之后
+                    new DataBaseVerification(InputUser, InputPassword).VerificationLogin();
+
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "登录错误");
+                    //返回登录界面
+                    new login();
+                    jFrame.removeNotify();
+                }
+            }
+            }
+        });
 
 
         //注册

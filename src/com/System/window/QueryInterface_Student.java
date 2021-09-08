@@ -1,5 +1,9 @@
 package com.System.window;
 
+import com.System.Student_Window.AllCourse;
+import com.System.Student_Window.AlterCourse;
+import com.System.Student_Window.MyCourse;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,21 +47,22 @@ public class QueryInterface_Student extends JFrame {
         jb1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+              new MyCourse();
             }
         });
 
         jb2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            new AllCourse();
+            removeNotify();
             }
         });
 
         jb3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            new AlterCourse();
             }
         });
 
