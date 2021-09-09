@@ -74,9 +74,7 @@ public class AddORDeleteCourse extends  JFrame {
         addCourse.setSize(5,25);
         jPanelTop.add(addCourse);
 
-        JButton DeleteCourse=new JButton("删除课程");
-        DeleteCourse.setSize(5,25);
-        jPanelTop.add(DeleteCourse);
+
 /** ---------------------------------------------------------*/
 
         JLabel OutPutLabel=new JLabel("显示框");

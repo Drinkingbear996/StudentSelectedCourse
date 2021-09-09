@@ -47,8 +47,6 @@ public class DataBaseVerification extends JFrame {
             pst.setString(1,UserVer);
             pst.setString(2,passwordVer);
 
-
-
             rs=pst.executeQuery();
 
             //如果能匹配
@@ -66,14 +64,12 @@ public class DataBaseVerification extends JFrame {
                     new QueryInterface_Student();
                     jFrame.removeNotify();
 
-
                 }
                 else  if ("老师".equals(department))
                 {
                     new QueryInterface_Teacher();
                     jFrame.removeNotify();
                 }
-
 
             }
             else
@@ -82,17 +78,11 @@ public class DataBaseVerification extends JFrame {
                     JOptionPane.showMessageDialog(null,"与数据库中无此用户");
             }
 
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             System.out.println("查找数据库错误");
         }
 
-
         }
-
-    public static void main(String[] args) {
-
-    }
 
 }

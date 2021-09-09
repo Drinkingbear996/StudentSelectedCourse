@@ -1,21 +1,33 @@
 package com.System.Tool;
 
+import com.mysql.cj.xdevapi.Table;
+
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 public class ConnectionJDBCCourse {
 
+    public String courseID;
+    public String courseName;
+    public String credit;
+    public String CourseCount;
 
- public String  result;
 
-public ArrayList<String> arrayList;
+    public ConnectionJDBCCourse(String courseID,String courseName, String credit,String CourseCount)
+    {
+        this.courseID=courseID;
+        this.courseName=courseName;
+        this.credit=credit;
+        this.CourseCount=CourseCount;
+    }
+
+    public ConnectionJDBCCourse() throws SQLException {
+
+    }
+
     //输入你要查询的内容
-    public ArrayList<String> SQL() throws SQLException {
+    public ArrayList<ConnectionJDBCCourse> SQL() throws SQLException {
         //通过数据库对象获取sql执行对象
-
+       ArrayList<ConnectionJDBCCourse> arrayList;
 
         //学号为唯一标识
         String sql = "select * from course  ";
@@ -37,10 +49,15 @@ public ArrayList<String> arrayList;
 
             while (set.next()) {
 
-                arrayList.add(set.getString("courseID"));
-                arrayList.add(set.getString("courseName"));
-                arrayList.add(set.getString("credit"));
-                arrayList.add(set.getString("CourseCount"));
+                arrayList.add(
+                new ConnectionJDBCCourse(
+                        set.getString("courseID"),
+                        set.getString("courseName"),
+                        set.getString("credit"),
+                        set.getString("CourseCount"))
+
+                              );
+
             }
 
         }catch (Exception e)
@@ -51,13 +68,14 @@ public ArrayList<String> arrayList;
     }
 
     public static void main(String[] args) throws SQLException {
-       ArrayList<String> a= new ArrayList<>();
-       a=new ConnectionJDBCCourse().SQL();
+        ArrayList<ConnectionJDBCCourse> a= new ConnectionJDBCCourse().SQL();
 
-       Iterator<String> i=a.iterator();
-       while(i.hasNext())
-       {
-           System.out.println("信息"+i.next()+"");
-       }
+        for (ConnectionJDBCCourse i:a) {
+            System.out.println(i.courseID);
+            System.out.println(i.courseName);
+            System.out.println(i.credit);
+            System.out.println(i.CourseCount);
+        }
+
     }
 }

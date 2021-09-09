@@ -1,13 +1,14 @@
 package com.System.window;
 
+import com.System.Student_Window.AllCourse;
 import com.System.Teacher_Window.AddORDeleteCourse;
-import com.System.Teacher_Window.AllCourseForTeacher;
 import com.System.Teacher_Window.MyTeaching;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 
 public class QueryInterface_Teacher  extends JFrame {
@@ -55,7 +56,11 @@ public class QueryInterface_Teacher  extends JFrame {
         jb2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               new AllCourseForTeacher();
+                try {
+                    new AllCourse();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 removeNotify();
             }
         });

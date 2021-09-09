@@ -3,15 +3,14 @@ package com.System.Student_Window;
 import com.System.Tool.ConnectionJDBC;
 import com.System.Tool.ConnectionJDBCCourse;
 import com.System.window.QueryInterface_Student;
+import com.mysql.cj.xdevapi.Table;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
 
 /** 默认是320 350*/
@@ -23,7 +22,7 @@ public class AllCourse extends JFrame {
   private   JPanel jPanelBottom;
   private JPanel output;
 
-    ArrayList<String> list;
+    ArrayList<ConnectionJDBCCourse> list;
 
 public AllCourse() throws SQLException {
     init();
@@ -92,9 +91,6 @@ public AllCourse() throws SQLException {
 
 
 
-
-        output.add(jTextArea,BorderLayout.CENTER);
-
 /** ---------------------------------------------------------*/
 
        JLabel OutputUser=new JLabel("欢迎进入!");
@@ -112,26 +108,23 @@ public AllCourse() throws SQLException {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                //点击前先初始化
                 jTextArea.setText("");
+
                 try {
+
                     list=new ConnectionJDBCCourse().SQL();
-
-
-                    jTextArea.append("课程编号  课程名称  课程学分  课程人数\r\n");
-
-                    for (int i = 0; i < list.size(); i++) {
-
-                        if(i==3)
-                        {
-                            System.out.println();
-                        }
-                        else
-                        {
-                            jTextArea.append(list.get(i)+"          ");
-                        }
-
+                    jTextArea.append("课程编号"+"\t"+"课程名称:"+"\t" +"学分:"+"\t"+"人数:"+"\t"+"\n\r");
+                    for (ConnectionJDBCCourse i:list) {
+                       jTextArea.append(i.courseID+"\t");
+                       jTextArea.append(i.courseName+"\t");
+                       jTextArea.append(i.credit+"\t");
+                       jTextArea.append(i.CourseCount+"\t"+"\n\r");
 
                     }
+
+                    output.add(jTextArea,BorderLayout.CENTER);
+
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -144,6 +137,6 @@ public AllCourse() throws SQLException {
     }
 
     public static void main(String[] args) throws SQLException {
-        new  AllCourse();
+        new AllCourse();
     }
 }

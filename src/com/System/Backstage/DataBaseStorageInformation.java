@@ -34,15 +34,8 @@ public class DataBaseStorageInformation {
             throwables.printStackTrace();
         }
 
-
         String sql1;
-
-
-
-
-            sql1="insert into loginInformation (user,password,name,department) values ('"+Register_User+"','"+Register_Password+"','"+RealName+"','"+Register_Department+"')";
-
-
+        sql1="insert into loginInformation (user,password,name,department) values ('"+Register_User+"','"+Register_Password+"','"+RealName+"','"+Register_Department+"')";
 
         //返回执行成功(受到影响)的命令数
 
@@ -56,12 +49,8 @@ public class DataBaseStorageInformation {
             System.out.println("数据添加失败!");
         }
 
-
         st.close();
         con.close();
     }
 
-    public static void main(String[] args) throws Exception {
-
-    }
 }

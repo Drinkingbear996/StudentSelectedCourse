@@ -59,7 +59,7 @@ public class AlterCourse extends JFrame {
         });
 
 
-        JLabel LabelSearch=new JLabel("请输入要查询的课程");
+        JLabel LabelSearch=new JLabel("搜索课程");
         LabelSearch.setSize(80,25);
         jPanelTop.add(LabelSearch);
 
@@ -73,13 +73,11 @@ public class AlterCourse extends JFrame {
 
 
 
-        JButton addCourse=new JButton("增加");
+        JButton addCourse=new JButton("添加课程");
         addCourse.setSize(5,25);
         jPanelTop.add(addCourse);
 
-        JButton DeleteCourse=new JButton("删除");
-        DeleteCourse.setSize(5,25);
-        jPanelTop.add(DeleteCourse);
+
 /** ---------------------------------------------------------*/
 
         JLabel OutPutLabel=new JLabel("显示框");
