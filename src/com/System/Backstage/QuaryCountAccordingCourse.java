@@ -38,12 +38,9 @@ public class QuaryCountAccordingCourse {
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "12345678");
         //获取sql执行对象
         PreparedStatement ps = null;
-        PreparedStatement ps1 = null;
 
         //返回结果集
         ResultSet set = null;
-
-        ResultSet set1=null;
 
         try {
             ps = con.prepareStatement(SQLList);
@@ -75,7 +72,7 @@ public class QuaryCountAccordingCourse {
 
     public String Count(String CourseName) throws SQLException {
 
-        String SQLcount = "select   count(ifnull(StudentName,0)) from SelectedCourse where SelectedCourseName=?  ";
+        String SQLcount = "select   count(ifnull(StudentName,0)) as 结果 from SelectedCourse where SelectedCourseName=?  ";
 
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "12345678");
         //获取sql执行对象
@@ -86,19 +83,22 @@ public class QuaryCountAccordingCourse {
 
         ps1 = con.prepareStatement(SQLcount);
 
+        ps1.setString(1,CourseName);
+
 
         //执行sql
         set1 = ps1.executeQuery();
 
+
         String result;
         if (set1.next())
         {
-             result=set1.getString(1);
+             result=set1.getString("结果");
             return result;
         }
         else
         {
-            return "0";
+            return "无";
         }
     }
 }

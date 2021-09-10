@@ -102,7 +102,7 @@ public class QuaryCourseForStudent extends JFrame {
         add(output,BorderLayout.CENTER);
         add(jPanelBottom,BorderLayout.SOUTH);
 
-        pack();
+
 
         //监听查询按钮
         SearchBtn.addActionListener(new ActionListener() {
@@ -123,7 +123,7 @@ public class QuaryCourseForStudent extends JFrame {
                         jTextArea.append(i.CourseName+"\t");
                         jTextArea.append(i.SelectedName+"\t"+"\n\r");
                     }
-                    OutPutLabel.setText("显示框         当前符合的人数为:"+new QuaryCountAccordingCourse().Count(input));
+                    OutPutLabel.setText("显示框         当前符合的人数为:"+new QuaryCountAccordingCourse().Count(input)+"人");
 
                     output.add(jTextArea,BorderLayout.CENTER);
 
