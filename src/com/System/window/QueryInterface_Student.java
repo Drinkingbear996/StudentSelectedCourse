@@ -78,7 +78,8 @@ public class QueryInterface_Student extends JFrame {
         jb4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 System.exit(0);
+
+                System.exit(0);
             }
         });
 

@@ -9,15 +9,14 @@ public class ConnectionJDBCCourse {
     public String courseID;
     public String courseName;
     public String credit;
-    public String CourseCount;
 
 
-    public ConnectionJDBCCourse(String courseID,String courseName, String credit,String CourseCount)
+
+    public ConnectionJDBCCourse(String courseID,String courseName, String credit)
     {
         this.courseID=courseID;
         this.courseName=courseName;
         this.credit=credit;
-        this.CourseCount=CourseCount;
     }
 
     public ConnectionJDBCCourse() throws SQLException {
@@ -53,8 +52,8 @@ public class ConnectionJDBCCourse {
                 new ConnectionJDBCCourse(
                         set.getString("courseID"),
                         set.getString("courseName"),
-                        set.getString("credit"),
-                        set.getString("CourseCount"))
+                        set.getString("credit")
+                      )
 
                               );
 
@@ -67,6 +66,8 @@ public class ConnectionJDBCCourse {
         return arrayList ;
     }
 
+
+
     public static void main(String[] args) throws SQLException {
         ArrayList<ConnectionJDBCCourse> a= new ConnectionJDBCCourse().SQL();
 
@@ -74,7 +75,7 @@ public class ConnectionJDBCCourse {
             System.out.println(i.courseID);
             System.out.println(i.courseName);
             System.out.println(i.credit);
-            System.out.println(i.CourseCount);
+
         }
 
     }

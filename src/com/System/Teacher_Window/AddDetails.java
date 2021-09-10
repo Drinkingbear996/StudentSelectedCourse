@@ -10,10 +10,11 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class AddDetails extends  JFrame {
+   private JFrame jframe;
 
     public AddDetails()
     {
-        JFrame jframe =new JFrame("增添课程");
+         jframe =new JFrame("增添课程");
 
         jframe.setVisible(true);
 
@@ -98,7 +99,7 @@ jButtonReturn.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
 
         new QueryInterface_Teacher();
-        removeNotify();
+        jframe.removeNotify();
     }
 });
         pack();

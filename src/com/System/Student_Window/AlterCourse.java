@@ -1,12 +1,15 @@
 package com.System.Student_Window;
 
+import com.System.Backstage.AddCourseForStudent;
+import com.System.Backstage.DatabaseAddCourseForTeacher;
 import com.System.window.QueryInterface_Student;
+import com.System.window.QueryInterface_Teacher;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.sql.SQLException;
 
 
 public class AlterCourse extends JFrame {
@@ -15,96 +18,104 @@ public class AlterCourse extends JFrame {
     private   JPanel jPanelBottom;
     private JPanel output;
 
-    public  AlterCourse()
+   private JFrame jframe;
+    public AlterCourse()
     {
-        init();
+        jframe =new JFrame("增添课程");
+
+        jframe.setVisible(true);
+
+
+        jframe.setSize(400,300);
+        jframe.setBackground(Color.white);
+
+        //窗口可以设置默认关闭
+        jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        //创建面板
+        JPanel jPanel=new JPanel();
+        jPanel.setLayout(null);
+
+        jframe.add(jPanel);
+
+        init(jPanel);
+
+
     }
 
 
-    public void init()
+    public void init(JPanel jPanel)
     {
 
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(320,350);
-        setLayout( new BorderLayout());
-        setVisible(true);
-
-        jPanelTop=new JPanel();
-        jPanelBottom=new JPanel();
-        output=new JPanel();
-
-        jPanelTop.setVisible(true);
-        jPanelTop.setLayout(new FlowLayout());
-
-        jPanelBottom.setVisible(true);
-        jPanelBottom.setLayout(new FlowLayout());
-
-        output.setVisible(true);
-        output.setLayout(new BorderLayout());
+        //用户
+        JLabel jLabelAddCourseID=new JLabel("选择课程ID");
+        jLabelAddCourseID.setBounds(50,20,80,25);
+        jPanel.add(jLabelAddCourseID);
 
 
+        JTextField jAddCourseID=new JTextField(20);
+        jAddCourseID.setBounds(140,20,165,25);
+        jPanel.add(jAddCourseID);
 
-/** ---------------------------------------------------------*/
-        JButton back=new JButton("返回");
-        back.setSize(10,25);
-        jPanelTop.add(back);
 
-        back.addActionListener(new ActionListener() {
+        JLabel jLabelAddCourseName=new JLabel("选择课程名称");
+        jLabelAddCourseName.setBounds(50,50,80,25);
+        jPanel.add(jLabelAddCourseName);
+
+
+        JTextField jAddCourseName=new JTextField(20);
+        jAddCourseName.setBounds(140,50,165,25);
+        jPanel.add(jAddCourseName);
+
+
+        JLabel jLabelName=new JLabel("姓名");
+        jLabelName.setBounds(50,80,80,25);
+        jPanel.add(jLabelName);
+
+        JTextField Name=new JTextField(20);
+        Name.setBounds(140,80,165,25);
+        jPanel.add(Name);
+
+        //登录按钮
+        JButton jButtonAdd=new JButton("添加");
+        jButtonAdd.setBounds(130,140,80,25);
+        jPanel.add(jButtonAdd);
+
+        JButton jButtonReturn=new JButton("返回");
+        jButtonReturn.setBounds(240,140,80,25);
+        jPanel.add(jButtonReturn);
+
+        jButtonAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String courseID=jAddCourseID.getText();
+                String CourseName=jAddCourseName.getText();
+                String SelectedName=Name.getText();
+
+                try {
+                 new AddCourseForStudent(courseID,CourseName,SelectedName).init();
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
+
+            }
+        });
+
+        jButtonReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 new QueryInterface_Student();
-                removeNotify();
+               jframe.removeNotify();
             }
         });
-
-
-        JLabel LabelSearch=new JLabel("搜索课程");
-        LabelSearch.setSize(80,25);
-        jPanelTop.add(LabelSearch);
-
-
-        JTextField Search=new JTextField(10);
-        Search.setSize(165,25);
-        jPanelTop.add(Search);
-
-        //获取内容
-        String input=Search.getText();
-
-
-
-        JButton addCourse=new JButton("添加课程");
-        addCourse.setSize(5,25);
-        jPanelTop.add(addCourse);
-
-
-/** ---------------------------------------------------------*/
-
-        JLabel OutPutLabel=new JLabel("显示框");
-        OutPutLabel.setSize(80,25);
-
-        output.add(OutPutLabel,BorderLayout.NORTH);
-
-        JTextArea jTextArea=new JTextArea(10,10);
-        jTextArea.setBounds(100,20,165,25);
-        jTextArea.setEditable(false);
-        output.add(jTextArea,BorderLayout.CENTER);
-
-/** ---------------------------------------------------------*/
-
-        JLabel OutputUser=new JLabel("欢迎进入!");
-
-        jPanelBottom.add(OutputUser,BorderLayout.SOUTH);
-
-/** ---------------------------------------------------------*/
-        add(jPanelTop,BorderLayout.NORTH);
-        add(output,BorderLayout.CENTER);
-        add(jPanelBottom,BorderLayout.SOUTH);
-
-
         pack();
-
 
     }
 
+    public static void main(String[] args) {
+        new AlterCourse();
+    }
 }

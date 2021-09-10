@@ -114,13 +114,11 @@ public AllCourse() throws SQLException {
                 try {
 
                     list=new ConnectionJDBCCourse().SQL();
-                    jTextArea.append("课程编号"+"\t"+"课程名称:"+"\t" +"学分:"+"\t"+"人数:"+"\t"+"\n\r");
+                    jTextArea.append("课程编号"+"\t"+"课程名称:"+"\t" +"学分:"+"\t"+"\n\r");
                     for (ConnectionJDBCCourse i:list) {
                        jTextArea.append(i.courseID+"\t");
                        jTextArea.append(i.courseName+"\t");
-                       jTextArea.append(i.credit+"\t");
-                       jTextArea.append(i.CourseCount+"\t"+"\n\r");
-
+                       jTextArea.append(i.credit+"\t"+"\n\r");
                     }
 
                     output.add(jTextArea,BorderLayout.CENTER);

@@ -17,7 +17,10 @@ public class ConnectionJDBC {
 
         //学号为唯一标识
         String sql = "select * from logininformation  where user=? ";
-//  获取数据库连接对象 Connection
+
+
+
+        //  获取数据库连接对象 Connection
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "12345678");
         //获取sql执行对象
         PreparedStatement ps = null;

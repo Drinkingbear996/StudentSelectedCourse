@@ -39,8 +39,9 @@ public class DatabaseAddCourseForTeacher extends JFrame {
 
             //返回执行成功(受到影响)的命令数
 
-            int count1=ps.executeUpdate(sql);
-            if (count1>0)
+          int judge= ps.executeUpdate();
+            System.out.println(judge);
+            if (judge>0)
             {
                 System.out.println("信息已经添加至数据库!");
                 JOptionPane.showMessageDialog(this,"添加成功");

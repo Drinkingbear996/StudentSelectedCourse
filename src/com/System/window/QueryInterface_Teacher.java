@@ -2,7 +2,7 @@ package com.System.window;
 
 import com.System.Student_Window.AllCourse;
 import com.System.Teacher_Window.AddORDeleteCourse;
-import com.System.Teacher_Window.MyTeaching;
+import com.System.Teacher_Window.QuaryCourseForStudent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,13 +36,12 @@ public class QueryInterface_Teacher  extends JFrame {
         jPanel=new JPanel();
         JButton jb1=new JButton("创建/删除课程");
         JButton jb2=new JButton("所有课程");
-        JButton jb3=new JButton("我的授课");
+        JButton jb3=new JButton("查询上课学生");
         JButton jb4=new JButton("退出系统");
 
 
         add(jb1);
         add(jb2);
-        add(jb3);
         add(jb4);
 
         jb1.addActionListener(new ActionListener() {
@@ -65,10 +64,11 @@ public class QueryInterface_Teacher  extends JFrame {
             }
         });
 
+
         jb3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MyTeaching();
+                new QuaryCourseForStudent();
                 removeNotify();
             }
         });
