@@ -35,9 +35,9 @@ public class QueryInterface_Teacher  extends JFrame {
         setVisible(true);
 
         jPanel=new JPanel();
-        JButton jb1=new JButton("创建/删除课程");
+        JButton jb1=new JButton("创建课程");
         JButton jb2=new JButton("所有课程");
-        JButton jb3=new JButton("查询上课学生");
+        JButton jb3=new JButton("查询上某门课的学生");
         JButton jb4=new JButton("退出系统");
 
 
