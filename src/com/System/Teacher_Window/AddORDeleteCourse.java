@@ -1,6 +1,7 @@
 package com.System.Teacher_Window;
 
 import com.System.window.QueryInterface_Student;
+import com.System.window.QueryInterface_Teacher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,7 +51,7 @@ public class AddORDeleteCourse extends  JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new QueryInterface_Student();
+                new QueryInterface_Teacher();
                 removeNotify();
             }
         });
@@ -73,6 +74,13 @@ public class AddORDeleteCourse extends  JFrame {
         JButton addCourse=new JButton("增加课程");
         addCourse.setSize(5,25);
         jPanelTop.add(addCourse);
+
+        addCourse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddDetails();
+            }
+        });
 
 
 /** ---------------------------------------------------------*/

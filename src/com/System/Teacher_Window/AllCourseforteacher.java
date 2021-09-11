@@ -1,6 +1,6 @@
 package com.System.Teacher_Window;
 
-import com.System.Backstage.QuaryCountAccordingCourse;
+import com.System.Backstage.ConnectionJDBCCourse;
 import com.System.window.QueryInterface_Student;
 import com.System.window.QueryInterface_Teacher;
 
@@ -11,33 +11,36 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class QuaryCourseForStudent extends JFrame {
-
-    public  JPanel jPanelTop;
-    public   JPanel jPanelBottom;
-    public JPanel output;
+/** 默认是320 350*/
 
 
+public class AllCourseforteacher extends JFrame {
 
-   public QuaryCourseForStudent()
-   {
+  private   JPanel jPanelTop;
+  private   JPanel jPanelBottom;
+  private JPanel output;
 
-   }
+    ArrayList<ConnectionJDBCCourse> list;
 
-    public void init()
-    {
-        setVisible(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(320,350);
+public AllCourseforteacher() throws SQLException {
+    init();
+}
+
+
+
+    public void init() throws SQLException {
+       setVisible(true);
+       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+       setSize(320,350);
         setLayout( new BorderLayout());
 
 
-        jPanelTop=new JPanel();
+       jPanelTop=new JPanel();
         jPanelBottom=new JPanel();
         output=new JPanel();
 
-        jPanelTop.setVisible(true);
-        jPanelTop.setLayout(new FlowLayout());
+       jPanelTop.setVisible(true);
+       jPanelTop.setLayout(new FlowLayout());
 
         jPanelBottom.setVisible(true);
         jPanelBottom.setLayout(new FlowLayout());
@@ -48,8 +51,8 @@ public class QuaryCourseForStudent extends JFrame {
 
 
 /** ---------------------------------------------------------*/
-        JButton back=new JButton("返回");
-        back.setSize(10,25);
+       JButton back=new JButton("返回");
+       back.setSize(10,25);
         jPanelTop.add(back);
 
         back.addActionListener(new ActionListener() {
@@ -61,29 +64,24 @@ public class QuaryCourseForStudent extends JFrame {
             }
         });
 
-        JLabel LabelSearch=new JLabel("请输入查询的课程");
-        LabelSearch.setSize(80,25);
-        jPanelTop.add(LabelSearch);
 
 
-        JTextField Search=new JTextField(10);
-        Search.setSize(165,25);
-        jPanelTop.add(Search);
-
-
-        JButton SearchBtn=new JButton("查询");
+        JButton SearchBtn=new JButton("点击查询所有课程");
         SearchBtn.setSize(10,25);
         jPanelTop.add(SearchBtn);
 
 
+
+
+
 /** ---------------------------------------------------------*/
 
-        JLabel OutPutLabel=new JLabel("显示框:   当前符合的人数为");
+      JLabel OutPutLabel=new JLabel("显示框");
         OutPutLabel.setSize(80,25);
 
-        output.add(OutPutLabel,BorderLayout.NORTH);
+      output.add(OutPutLabel,BorderLayout.NORTH);
 
-        //显示文本
+      //显示文本
         JTextArea jTextArea=new JTextArea(10,10);
         jTextArea.setBounds(100,20,165,25);
         jTextArea.setEditable(false);
@@ -93,15 +91,14 @@ public class QuaryCourseForStudent extends JFrame {
 
 /** ---------------------------------------------------------*/
 
-        JLabel OutputUser=new JLabel("欢迎进入!");
+       JLabel OutputUser=new JLabel("欢迎进入!");
 
-        jPanelBottom.add(OutputUser,BorderLayout.SOUTH);
+       jPanelBottom.add(OutputUser,BorderLayout.SOUTH);
 
 /** ---------------------------------------------------------*/
         add(jPanelTop,BorderLayout.NORTH);
         add(output,BorderLayout.CENTER);
         add(jPanelBottom,BorderLayout.SOUTH);
-
 
 
         //监听查询按钮
@@ -111,19 +108,16 @@ public class QuaryCourseForStudent extends JFrame {
 
                 //点击前先初始化
                 jTextArea.setText("");
-                //获取按输入内容
-                String input=Search.getText();
-                ArrayList<QuaryCountAccordingCourse> list=null;
+
                 try {
 
-                   list=new QuaryCountAccordingCourse().SQL(input);
-                    jTextArea.append("课程ID"+"\t"+"课程名称:"+"\t" +"学生姓名:"+"\t"+"\n\r");
-                    for (QuaryCountAccordingCourse i:list) {
-                        jTextArea.append(i.courseID+ "\t");
-                        jTextArea.append(i.CourseName+"\t");
-                        jTextArea.append(i.SelectedName+"\t"+"\n\r");
+                    list=new ConnectionJDBCCourse().SQL();
+                    jTextArea.append("课程编号"+"\t"+"课程名称:"+"\t" +"学分:"+"\t"+"\n\r");
+                    for (ConnectionJDBCCourse i:list) {
+                       jTextArea.append(i.courseID+"\t");
+                       jTextArea.append(i.courseName+"\t");
+                       jTextArea.append(i.credit+"\t"+"\n\r");
                     }
-                    OutPutLabel.setText("显示框         当前符合的人数为:"+new QuaryCountAccordingCourse().Count(input)+"人");
 
                     output.add(jTextArea,BorderLayout.CENTER);
 
@@ -134,9 +128,11 @@ public class QuaryCourseForStudent extends JFrame {
 
             }
         });
+
+
     }
 
-    public static void main(String[] args) {
-       new QuaryCourseForStudent().init();
+    public static void main(String[] args) throws SQLException {
+        new AllCourseforteacher();
     }
 }

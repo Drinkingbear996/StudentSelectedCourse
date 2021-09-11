@@ -1,9 +1,5 @@
 package com.System.Backstage;
 
-import com.System.Tool.ConnectionJDBCCourse;
-import com.System.window.QueryInterface_Student;
-import com.System.window.QueryInterface_Teacher;
-
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -55,11 +51,13 @@ public class AddCourseForStudent {
                  judge= pst.executeUpdate();
                   if (judge>0)
                   {
+                      JOptionPane.showMessageDialog(null,"课程添加成功");
                       System.out.println("学生添加数据课程成功！");
                       break;
                   }
                   else
                   {
+                      JOptionPane.showMessageDialog(null,"课程添加失败");
                       System.out.println("学生添加课程数据失败！");
                       break;
                   }

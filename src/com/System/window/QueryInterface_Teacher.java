@@ -2,6 +2,7 @@ package com.System.window;
 
 import com.System.Student_Window.AllCourse;
 import com.System.Teacher_Window.AddORDeleteCourse;
+import com.System.Teacher_Window.AllCourseforteacher;
 import com.System.Teacher_Window.QuaryCourseForStudent;
 
 import javax.swing.*;
@@ -42,6 +43,7 @@ public class QueryInterface_Teacher  extends JFrame {
 
         add(jb1);
         add(jb2);
+        add(jb3);
         add(jb4);
 
         jb1.addActionListener(new ActionListener() {
@@ -56,7 +58,7 @@ public class QueryInterface_Teacher  extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    new AllCourse();
+                    new AllCourseforteacher();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -68,7 +70,7 @@ public class QueryInterface_Teacher  extends JFrame {
         jb3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new QuaryCourseForStudent();
+                new QuaryCourseForStudent().init();
                 removeNotify();
             }
         });

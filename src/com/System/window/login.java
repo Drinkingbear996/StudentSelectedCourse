@@ -93,8 +93,8 @@ public class login extends JFrame  {
 
                 if (InputPassword.isEmpty() || InputUser.isEmpty()) {
                     JOptionPane.showMessageDialog(jframe, "用户名或密码未完全填写");
+
                     new login();
-                    jframe.removeNotify();
                 } else {
 
                 try {

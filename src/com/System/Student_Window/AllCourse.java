@@ -1,9 +1,7 @@
 package com.System.Student_Window;
 
-import com.System.Tool.ConnectionJDBC;
-import com.System.Tool.ConnectionJDBCCourse;
+import com.System.Backstage.ConnectionJDBCCourse;
 import com.System.window.QueryInterface_Student;
-import com.mysql.cj.xdevapi.Table;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.List;
 
 /** 默认是320 350*/
 
